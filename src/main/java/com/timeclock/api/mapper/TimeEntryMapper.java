@@ -10,7 +10,7 @@ import org.mapstruct.MappingConstants;
 @Mapper(componentModel = MappingConstants.ComponentModel.SPRING)
 public interface TimeEntryMapper {
 
-    @Mapping(target = "timestamp", expression = "java(java.time.LocalDateTime.now())")
+    @Mapping(target = "timestamp", expression = "java(timeEntryPostRequest.getTimestamp() != null ? timeEntryPostRequest.getTimestamp() : java.time.LocalDateTime.now())")
     TimeEntry toTimeEntryEntity(TimeEntryPostRequest timeEntryPostRequest);
 
     TimeEntryPostResponse toTimeEntryPostResponse(TimeEntry timeEntry);
