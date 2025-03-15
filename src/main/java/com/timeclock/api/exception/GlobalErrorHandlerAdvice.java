@@ -14,4 +14,12 @@ public class GlobalErrorHandlerAdvice {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(error);
     }
 
+    @ExceptionHandler(EntriesPerDayException.class)
+    public ResponseEntity<DefaultErrorMessage> handleWeekendEntryNotAllowed(EntriesPerDayException e) {
+        var error = new DefaultErrorMessage(e.getMessage());
+
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(error);
+    }
+
+
 }
