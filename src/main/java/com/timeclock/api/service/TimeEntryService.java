@@ -4,14 +4,12 @@ import com.timeclock.api.domain.TimeEntry;
 import com.timeclock.api.exception.EntriesPerDayException;
 import com.timeclock.api.exception.WeekendEntryNotAllowedException;
 import com.timeclock.api.repository.TimeEntryRepository;
-import com.timeclock.api.response.TotalWorkedHoursResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.DayOfWeek;
 import java.time.Duration;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.List;
 
 @Service

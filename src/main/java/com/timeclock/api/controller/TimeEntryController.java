@@ -1,6 +1,5 @@
 package com.timeclock.api.controller;
 
-import com.timeclock.api.domain.TimeEntry;
 import com.timeclock.api.exception.DefaultErrorMessage;
 import com.timeclock.api.mapper.TimeEntryMapper;
 import com.timeclock.api.request.TimeEntryPostRequest;
@@ -20,7 +19,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 @RestController
 @RequestMapping("/api/time-entry")

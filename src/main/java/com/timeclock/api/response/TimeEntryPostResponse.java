@@ -1,6 +1,5 @@
 package com.timeclock.api.response;
 
-import com.timeclock.api.domain.EntryType;
 import lombok.*;
 
 import java.time.LocalDateTime;
