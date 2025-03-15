@@ -1,0 +1,10 @@
+spring:
+  application:
+    name: time-clock
+  datasource:
+    url: jdbc:sqlite:time.db
+    driver-class-name: org.sqlite.JDBC
+  jpa:
+    database-platform: org.hibernate.community.dialect.SQLiteDialect
+    hibernate:
+      ddl-auto: update
