@@ -3,6 +3,7 @@ package com.timeclock.api.controller;
 import com.timeclock.api.domain.TimeEntry;
 import com.timeclock.api.mapper.TimeEntryMapper;
 import com.timeclock.api.request.TimeEntryPostRequest;
+import com.timeclock.api.response.TimeEntryPostResponse;
 import com.timeclock.api.service.TimeEntryService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -22,12 +23,14 @@ public class TimeEntryController {
 
 
     @PostMapping
-    public ResponseEntity<TimeEntry> registerTimeEntry(@RequestBody TimeEntryPostRequest timeEntryPostRequest) {
+    public ResponseEntity<TimeEntryPostResponse> registerTimeEntry(@RequestBody TimeEntryPostRequest timeEntryPostRequest) {
 
         var timeEntryEntity = mapper.toTimeEntryEntity(timeEntryPostRequest);
-        var timeEntry1 = service.registerTimeEntry(timeEntryEntity);
+        var timeEntryRegistered = service.registerTimeEntry(timeEntryEntity);
 
-        return ResponseEntity.status(HttpStatus.CREATED).body(timeEntry1);
+        var timeEntryPostResponse = mapper.toTimeEntryPostResponse(timeEntryRegistered);
+
+        return ResponseEntity.status(HttpStatus.CREATED).body(timeEntryPostResponse);
     }
 
 
