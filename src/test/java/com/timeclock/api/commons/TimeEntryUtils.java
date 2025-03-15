@@ -11,7 +11,7 @@ import java.util.List;
 @Component
 public class TimeEntryUtils {
 
-    public List<TimeEntry> newTimeEntry() {
+    public List<TimeEntry> newTimeEntryList() {
         var entrie1 = TimeEntry.builder().timestamp(LocalDateTime.now()).type(EntryType.CLOCK_IN).build();
         var entrie2 = TimeEntry.builder().timestamp(LocalDateTime.now()).type(EntryType.CLOCK_OUT).build();
         var entrie3 = TimeEntry.builder().timestamp(LocalDateTime.now()).type(EntryType.CLOCK_IN).build();
@@ -19,4 +19,21 @@ public class TimeEntryUtils {
 
         return new ArrayList<>(List.of(entrie1, entrie2, entrie3, entrie4));
     }
+
+    public TimeEntry newTimeEntryValidToSave() {
+        return TimeEntry.builder()
+                .timestamp(LocalDateTime.of(2025, 3, 19, 9, 0))
+                .type(EntryType.CLOCK_IN)
+                .build();
+    }
+
+    public TimeEntry newTimeEntryInvalidToSave() {
+        return TimeEntry.builder()
+                .timestamp(LocalDateTime.of(2025, 3, 16, 9, 0))
+                .type(EntryType.CLOCK_IN)
+                .build();
+    }
+
+
+
 }
