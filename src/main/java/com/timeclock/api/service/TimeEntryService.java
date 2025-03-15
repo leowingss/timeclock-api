@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class TimeEntryService {
 
-    private TimeEntryRepository repository;
+    private final TimeEntryRepository repository;
 
     public TimeEntry registerTimeEntry(TimeEntry timeEntry) {
         return repository.save(timeEntry);
