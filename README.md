@@ -22,7 +22,7 @@ The API allows employees to register their work hours by clocking in and out, wh
 Before running the application, ensure you have the following installed:
 - ✅ Java 17 or higher 
 - ✅ Maven 
-- ✅ Git (optional, for cloning the repository) 
+- ✅ Git (Optional, for cloning the repository) 
 - ✅ Docker (If running the application in a container)
 ----
 ## 🚀 Running the Application
@@ -85,6 +85,32 @@ This project uses GitHub Actions to automatically run tests on each push and pul
 This API is documented using Springdoc OpenAPI. You can access the API documentation at:
 
 [Swagger UI](http://localhost:8080/swagger-ui/index.html)
+
+---
+
+## 📌 Example Request and Response
+
+ ➤ Register a Time Entry (`POST /api/time-entry`)
+
+**Request:**
+```
+POST /api/time-entry
+Content-Type: application/json
+```
+```json
+{
+  "type": "CLOCK_IN"
+}
+```
+
+Response (201 Created)
+```json
+{
+  "id": 1,
+  "type": "CLOCK_IN",
+  "timestamp": "2025-03-15T08:00:00.000000"
+}
+```
 
 
 Here’s an example of how the POST /api/time-entry endpoint is documented:
