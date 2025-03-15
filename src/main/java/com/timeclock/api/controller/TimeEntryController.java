@@ -5,17 +5,17 @@ import com.timeclock.api.mapper.TimeEntryMapper;
 import com.timeclock.api.request.TimeEntryPostRequest;
 import com.timeclock.api.response.TimeEntryPostResponse;
 import com.timeclock.api.service.TimeEntryService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/time-entry")
 @RequiredArgsConstructor
+@Tag(name = "TimeClock API", description = "API for managing employee time entries")
 public class TimeEntryController {
 
     private final TimeEntryService service;
@@ -23,6 +23,12 @@ public class TimeEntryController {
 
 
     @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
+    @Operation(
+            summary = "Register a new time entry",
+            description = "Creates a new time entry for current day. If the timestamp is not provided, the current time is" +
+                    " automatically assigned. Time entries are not allowed on weekends."
+    )
     public ResponseEntity<TimeEntryPostResponse> registerTimeEntry(@RequestBody TimeEntryPostRequest timeEntryPostRequest) {
 
         var timeEntryEntity = mapper.toTimeEntryEntity(timeEntryPostRequest);
