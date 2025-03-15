@@ -10,6 +10,7 @@ import java.time.LocalDateTime;
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 public class TimeEntry {
     @EqualsAndHashCode.Include
     @Id
