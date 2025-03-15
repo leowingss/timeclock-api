@@ -1,6 +1,7 @@
 package com.timeclock.api.service;
 
 import com.timeclock.api.commons.TimeEntryUtils;
+import com.timeclock.api.domain.TimeEntry;
 import com.timeclock.api.repository.TimeEntryRepository;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
@@ -11,6 +12,10 @@ import org.mockito.BDDMockito;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+
+import java.time.LocalDate;
+import java.util.Collections;
+import java.util.List;
 
 @ExtendWith(MockitoExtension.class)
 class TimeEntryServiceTest {
@@ -58,5 +63,34 @@ class TimeEntryServiceTest {
                 .isThrownBy(() -> service.registerTimeEntry(timeEntryToBeSave))
                 .isInstanceOf(IllegalArgumentException.class);
     }
+
+    @Test
+    @DisplayName("calculateWorkedHours should returns total hours worked by day")
+    void calculateWorkedHours_ReturnsTotalHoursWorked_WhenValidEntrie() {
+        LocalDate date = LocalDate.of(2025, 3, 17);
+        List<TimeEntry> entries = timeEntryUtils.newTimeEntryListForWorkedHoursTest();
+
+        BDDMockito.when(repository.findByTimestampBetween(date.atStartOfDay(), date.atStartOfDay().plusDays(1)))
+                .thenReturn(entries);
+
+        var totalHours = service.calculateWorkedHours(date);
+
+        Assertions.assertThat(totalHours).isEqualTo(8.0);
+
+    }
+
+    @Test
+    @DisplayName("calculateWorkedHours should return 0.0 when no entries exist")
+    void calculateWorkedHours_ReturnsZero_WhenNoEntriesExist() {
+        LocalDate date = LocalDate.of(2025, 3, 17);
+        BDDMockito.when(repository.findByTimestampBetween(
+                        date.atStartOfDay(), date.atStartOfDay().plusDays(1)))
+                .thenReturn(Collections.emptyList());
+
+        double totalHours = service.calculateWorkedHours(date);
+
+        Assertions.assertThat(totalHours).isEqualTo(0.0);
+    }
+
 
 }

@@ -4,6 +4,7 @@ import com.timeclock.api.domain.EntryType;
 import com.timeclock.api.domain.TimeEntry;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -34,5 +35,16 @@ public class TimeEntryUtils {
                 .build();
     }
 
+
+    public List<TimeEntry> newTimeEntryListForWorkedHoursTest() {
+        LocalDateTime baseDate = LocalDate.of(2025, 3, 17).atStartOfDay();
+
+        var entrie1 = TimeEntry.builder().timestamp(baseDate.plusHours(8)).type(EntryType.CLOCK_IN).build();
+        var entrie2 = TimeEntry.builder().timestamp(baseDate.plusHours(12)).type(EntryType.CLOCK_OUT).build();
+        var entrie3 = TimeEntry.builder().timestamp(baseDate.plusHours(13)).type(EntryType.CLOCK_IN).build();
+        var entrie4 = TimeEntry.builder().timestamp(baseDate.plusHours(17)).type(EntryType.CLOCK_OUT).build();
+
+        return List.of(entrie1, entrie2, entrie3, entrie4);
+    }
 
 }
