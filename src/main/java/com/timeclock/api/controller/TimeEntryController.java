@@ -4,13 +4,18 @@ import com.timeclock.api.domain.TimeEntry;
 import com.timeclock.api.mapper.TimeEntryMapper;
 import com.timeclock.api.request.TimeEntryPostRequest;
 import com.timeclock.api.response.TimeEntryPostResponse;
+import com.timeclock.api.response.TotalWorkedHoursResponse;
 import com.timeclock.api.service.TimeEntryService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @RestController
 @RequestMapping("/api/time-entry")
@@ -37,6 +42,15 @@ public class TimeEntryController {
         var timeEntryPostResponse = mapper.toTimeEntryPostResponse(timeEntryRegistered);
 
         return ResponseEntity.status(HttpStatus.CREATED).body(timeEntryPostResponse);
+    }
+
+    @GetMapping("/worked-hours")
+    public ResponseEntity<TotalWorkedHoursResponse> getWorkedHours(@RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date) {
+
+        double totalHours = service.calculateWorkedHours(date);
+        var totalWorkedHoursResponse = mapper.toTotalWorkedHoursResponse(date, totalHours);
+
+        return ResponseEntity.ok(totalWorkedHoursResponse);
     }
 
 
