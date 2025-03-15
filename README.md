@@ -3,15 +3,49 @@
 This project is a RESTful API designed for employee time tracking, created as a test assignment for a Junior Backend Java position.
 
 
-## Technologies
+## 📌Technologies
 - Java 17
 - Spring Boot
 - Spring Data JPA
-- H2 and SQLite.
+- H2 database.
 - Docker for containerization
 - GitHub Actions for CI/CD
 
-## API Documentation
+## 📢 Prerequisites
+Before running the application, ensure you have the following installed:
+✅ Java 17 or higher 
+✅ Maven 
+✅ Git (optional, for cloning the repository) 
+
+## 🚀 Running the Application
+
+Clone the repository
+
+```shell
+git clone https://github.com/leowingss/timeclock-api.git
+cd timeclock-api
+```
+
+Build the project
+```shell
+mvn clean install
+```
+
+Run the application
+```shell
+mvn spring-boot:run
+```
+
+The API will be running at: http://localhost:8080
+
+--- 
+
+## 🛠 Running Tests
+```shell
+mvn test
+```
+
+## 📖 API Documentation
 
 This API is documented using Springdoc OpenAPI. You can access the API documentation at:
 
