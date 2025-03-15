@@ -13,9 +13,9 @@ This project is a RESTful API designed for employee time tracking, created as a 
 
 ## 📢 Prerequisites
 Before running the application, ensure you have the following installed:
-✅ Java 17 or higher 
-✅ Maven 
-✅ Git (optional, for cloning the repository) 
+- ✅ Java 17 or higher 
+- ✅ Maven 
+- ✅ Git (optional, for cloning the repository) 
 
 ## 🚀 Running the Application
 
