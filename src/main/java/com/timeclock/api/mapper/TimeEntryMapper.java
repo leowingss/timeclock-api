@@ -14,6 +14,7 @@ import java.time.LocalDate;
 public interface TimeEntryMapper {
 
     @Mapping(target = "timestamp", expression = "java(timeEntryPostRequest.getTimestamp() != null ? timeEntryPostRequest.getTimestamp() : java.time.LocalDateTime.now())")
+    @Mapping(target = "id", ignore = true)
     TimeEntry toTimeEntryEntity(TimeEntryPostRequest timeEntryPostRequest);
 
     TimeEntryPostResponse toTimeEntryPostResponse(TimeEntry timeEntry);
