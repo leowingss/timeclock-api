@@ -1,3 +1,4 @@
-resource "aws_ecr_repository" "timeclock_api" {
-  name = "timeclock-api"
+module "ecr_timeclock" {
+  source = "./modules/ecr"
+  name   = "timeclock-api"
 }
