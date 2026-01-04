@@ -32,3 +32,33 @@ build/
 ### VS Code ###
 .vscode/
 META-INF/
+
+# Terraform
+.terraform/
+*.tfstate
+*.tfstate.*
+crash.log
+crash.*.log
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+.terraformrc
+terraform.rc
+
+# Terraform vars
+terraform.tfvars
+
+# Kubernetes
+*.kubeconfig
+kubeconfig.yaml
+kubeconfig.yml
+.kube/
+
+# Helm
+Chart.lock
+*.tgz
+values-secret.yaml
+values-*.secret.yaml
+secrets.yaml
+secrets-*.yaml
