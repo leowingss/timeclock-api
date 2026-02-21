@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: timeclock-api
+  labels:
+    app: timeclock-api
+spec:
+  selector:
+    app: timeclock-api
+  ports:
+    - name: http
+      port: 8080
+      targetPort: 8080

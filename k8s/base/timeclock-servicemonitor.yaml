@@ -1,0 +1,14 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: timeclock-api
+  labels:
+    release: monitoring
+spec:
+  selector:
+    matchLabels:
+      app: timeclock-api
+  endpoints:
+    - port: http
+      path: /actuator/prometheus
+      interval: 15s

@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: timeclock-api
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: timeclock-api
+  template:
+    metadata:
+      labels:
+        app: timeclock-api
+    spec:
+      containers:
+        - name: timeclock-api
+          image: timeclock-api:1.2
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8080
+          envFrom:
+            - configMapRef:
+                name: timeclock-api-config
