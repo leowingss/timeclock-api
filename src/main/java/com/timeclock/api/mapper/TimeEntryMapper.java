@@ -6,11 +6,10 @@ import com.timeclock.api.response.TimeEntryPostResponse;
 import com.timeclock.api.response.TotalWorkedHoursResponse;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
-import org.mapstruct.MappingConstants;
 
 import java.time.LocalDate;
 
-@Mapper(componentModel = MappingConstants.ComponentModel.SPRING)
+@Mapper(componentModel = "spring")
 public interface TimeEntryMapper {
 
     @Mapping(target = "timestamp", expression = "java(timeEntryPostRequest.getTimestamp() != null ? timeEntryPostRequest.getTimestamp() : java.time.LocalDateTime.now())")
