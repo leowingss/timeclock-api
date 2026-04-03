@@ -1,0 +1,32 @@
+name: Manual Deploy
+
+on:
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: 'Deployment environment'
+        required: true
+        default: 'prod'
+        type: choice
+        options:
+          - prod
+          - dev
+
+jobs: 
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Install Helm
+        uses: azure/setup-helm@v1
+      
+      - name: Deploy to Kubernetes
+        run: |
+          if [ "${{ github.event.inputs.environment }}" == "prod" ]; then
+            helm upgrade --install timeclock ./helm/timeclock-chart -f ./helm/timeclock-chart/values/prod.yaml
+          else
+            helm upgrade --install timeclock ./helm/timeclock-chart -f ./helm/timeclock-chart/values/dev.yaml
+          fi
