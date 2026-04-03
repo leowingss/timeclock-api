@@ -1,0 +1,7 @@
+replicaCount: 1
+
+configMap:
+  springProfilesActive: dev
+
+ingress:
+  host: timeclock-dev.local
