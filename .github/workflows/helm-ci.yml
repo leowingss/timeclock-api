@@ -23,7 +23,7 @@ jobs:
         run: helm lint ./helm/timeclock-chart
       
       - name: Render chart with default values
-        run: helm template timeclock ./helm/timeclock-chart
+        run: run: helm template timeclock ./helm/timeclock-chart --set serviceMonitor.enabled=false
 
       - name: Render chart with prod values
-        run: helm template timeclock ./helm/timeclock-chart -f ./helm/timeclock-chart/values/prod.yaml
+        run: run: helm template timeclock ./helm/timeclock-chart -f ./helm/timeclock-chart/values/prod.yaml --set serviceMonitor.enabled=false
