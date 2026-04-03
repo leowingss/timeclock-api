@@ -1,0 +1,29 @@
+name: Helm CI 
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  helm:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Install Helm
+        uses: azure/setup-helm@v1
+      
+      - name: Helm lint
+        run: helm lint ./helm/timeclock-chart
+      
+      - name: Render chart with default values
+        run: helm template timeclock ./helm/timeclock-chart
+
+      - name: Render chart with prod values
+        run: helm template timeclock ./helm/timeclock-chart -f ./helm/timeclock-chart/values/prod.yaml
