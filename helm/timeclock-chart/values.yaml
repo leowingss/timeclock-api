@@ -1,0 +1,34 @@
+replicaCount: 1
+
+image:
+  repository: timeclock-api
+  tag: "1.2"
+  pullPolicy: IfNotPresent
+
+containerPort: 8080
+
+configMap:
+  name: timeclock-api-config
+  springProfilesActive: dev
+
+service:
+  name: timeclock-api
+  type: ClusterIP
+  port: 80
+  targetPort: 8080
+
+serviceMonitor:
+  enabled: true
+  name: timeclock-api
+  releaseLabel: monitoring
+  path: /actuator/prometheus
+  interval: 15s
+
+ingress:
+  enabled: true
+  name: timeclock-api
+  host: timeclock.local
+  path: /
+  pathType: Prefix
+  serviceName: timeclock-api
+  servicePort: 80
